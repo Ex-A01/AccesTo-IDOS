@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imperial data storage</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #000;
+            color: #00ff00;
+        }
+
+        #desktop {
+            background: #000; /* couleur de fond du bureau */
+            height: 100vh;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .icon {
+            width: 90px;
+            height: 90px;
+            margin: 10px;
+            text-align: center;
+            cursor: pointer;
+            background-color: #333;
+            border: 1px solid #00ff00;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+        .icon-alt {
+            width: 90px;
+            height: 90px;
+            margin: 10px;
+            text-align: center;
+            cursor: pointer;
+            background-color: #333; /* Couleur différente */
+            border: 1px solid #b400f0;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(180, 0, 240, 0.5);
+            color: #b400f0; /* Couleur du texte */
+        }
+
+
+        .window {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background: #000;
+            color: #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            z-index: 1;
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+        }
+        .window-alt {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background: #000;
+            color: #b400f0;
+            box-shadow: 0 0 10px rgba(180, 0, 240, 0.5);
+            z-index: 1;
+            border: 2px solid #b400f0;
+            border-radius: 10px;
+        }
+
+        .story-content {
+            width: 400px;
+            height: 300px;
+        }
+
+        button {
+            background-color: #333;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        buttonAlt {
+            background-color: #333;
+            color: #b400f0;
+            border: 1px solid #b400f0;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div id="desktop">
+        <div class="icon" onclick="openStory('Histoire 1')">Mémoire de l'éternel n°1</div>
+        <div class="icon" onclick="openStory('Histoire 2')">Mémoire de l'éternel n°2</div>
+        <div class="icon-alt" onclick="openStoryAlt('Histoire 3')">Mémoire de l'éternel n°3</div>
+        <!-- Ajoutez d'autres icônes de fichiers ici -->
+
+        <div id="story-window" class="window">
+            <h2 id="story-title"></h2>
+            <p id="story-text"></p>
+            <button onclick="closeStory()">Fermer</button>
+        </div>
+        <div id="story-window-alt" class="window-alt">
+            <h2 id="story-title-alt"></h2>
+            <p id="story-text-alt"></p>
+            <buttonAlt onclick="closeStoryAlt()">Fermer</buttonAlt>
+        </div>
+    </div>
+
+    <script>
+        function openStory(storyName) {
+            var storyTitle = '';
+            var storyText = '';
+
+            // Assignez les détails de l'histoire en fonction du nom du fichier
+            if (storyName === 'Histoire 1') {
+                storyTitle = 'Devise';
+                storyText = 'Elle et moi étions follement amoureux, de nous, de la vie, mais aussi de la nation. Quand l’heure du changement sonna, je fus proclamé empereur, et je lui ai promis sa prospérité à notre nation. Si pour ma belle je dépense mon amour, pour mon peuple j’offre toutes mes richesses qui n’ont aucune véritable valeur à mes yeux. Ici l’opulence n’est pas misérable, chacun peut y accéder, et ceux qui sont réellement ont du cœur. La vie ensemble est la règle d’or ici.';
+            } else if (storyName === 'Histoire 2') {
+                storyTitle = 'Notre refuge';
+                storyText = 'Ici c’est la forêt du contraste, la vie est flamboyante tout en étant gelée à travers le temps. Dans ce havre cristallisé coule une rivière pure et fraîche, ornée de ses mille et un galets reflétant l’infini, elle illumines les âmes et les arbres pourtant déjà si clair. Ce flux de lumière se dirigent vers un lac encore plus resplendissant, malgré  le paysage figé dans une clarté sans pareil, il y fait bon vivre. Ô douce forêt bercé par les vents nocturne, je dois avoué que tu concurrence la beauté de ma belle à qui j’ai prêter serment';
+            } else if (storyName === 'Histoire 3') {
+                storyTitle = 'La guerre de treize jours';
+                storyText = 'La guerre fait rage depuis maintenant onze jours. Aussi pitoyable que cela puisse être, nos frontière nord sont contestées. À l’heure où j’écris ceci, nous sommes en position défensive mais s’il le faut nous riposteront et ils imploreront notre pitié. Je n’en aurait point ! Depuis peu, nous sommes alliés avec la puissance résidant à l’Est de nos frontières. Demain je verrais pour engager un « cesser le feu » pour éviter le pire, il serai dommage de devoir blesser des innocents.'
+            }
+
+            // Masquez les icônes de fichiers
+            var icons = document.getElementsByClassName('icon');
+            for (var i = 0; i < icons.length; i++) {
+                icons[i].style.display = 'none';
+            }
+
+            // Mettez à jour le contenu de la fenêtre avec les détails de l'histoire
+            document.getElementById('story-title').textContent = storyTitle;
+            document.getElementById('story-text').textContent = storyText;
+
+            // Affichez la fenêtre
+            document.getElementById('story-window').style.display = 'block';
+        }
+
+        function openStoryAlt(storyName) {
+            var storyTitle = '';
+            var storyText = '';
+
+            // Assignez les détails de l'histoire en fonction du nom du fichier
+            if (storyName === 'Histoire 1') {
+                storyTitle = 'Devise';
+                storyText = 'Elle et moi étions follement amoureux, de nous, de la vie, mais aussi de la nation. Quand l’heure du changement sonna, je fus proclamé empereur, et je lui ai promis sa prospérité à notre nation. Si pour ma belle je dépense mon amour, pour mon peuple j’offre toutes mes richesses qui n’ont aucune véritable valeur à mes yeux. Ici l’opulence n’est pas misérable, chacun peut y accéder, et ceux qui sont réellement ont du cœur. La vie ensemble est la règle d’or ici.';
+            } else if (storyName === 'Histoire 2') {
+                storyTitle = 'Notre refuge';
+                storyText = 'Ici c’est la forêt du contraste, la vie est flamboyante tout en étant gelée à travers le temps. Dans ce havre cristallisé coule une rivière pure et fraîche, ornée de ses mille et un galets reflétant l’infini, elle illumines les âmes et les arbres pourtant déjà si clair. Ce flux de lumière se dirigent vers un lac encore plus resplendissant, malgré  le paysage figé dans une clarté sans pareil, il y fait bon vivre. Ô douce forêt bercé par les vents nocturne, je dois avoué que tu concurrence la beauté de ma belle à qui j’ai prêter serment';
+            } else if (storyName === 'Histoire 3') {
+                storyTitle = 'La guerre de treize jours';
+                storyText = 'La guerre fait rage depuis maintenant onze jours. Aussi pitoyable que cela puisse être, nos frontière nord sont contestées. À l’heure où j’écris ceci, nous sommes en position défensive mais s’il le faut nous riposteront et ils imploreront notre pitié. Je n’en aurait point ! Depuis peu, nous sommes alliés avec la puissance résidant à l’Est de nos frontières. Demain je verrais pour engager un « cesser le feu » pour éviter le pire, il serai dommage de devoir blesser des innocents.'
+            }
+
+            // Masquez les icônes de fichiers
+            var icons = document.getElementsByClassName('icon');
+            for (var i = 0; i < icons.length; i++) {
+                icons[i].style.display = 'none';
+            }
+
+            // Mettez à jour le contenu de la fenêtre avec les détails de l'histoire
+            document.getElementById('story-title-alt').textContent = storyTitle;
+            document.getElementById('story-text-alt').textContent = storyText;
+
+            // Affichez la fenêtre
+            document.getElementById('story-window-alt').style.display = 'block';
+        }
+
+        function closeStory() {
+            // Affichez à nouveau les icônes de fichiers
+            var icons = document.getElementsByClassName('icon');
+            for (var i = 0; i < icons.length; i++) {
+                icons[i].style.display = 'block';
+            }
+
+            // Masquer la fenêtre
+            document.getElementById('story-window').style.display = 'none';
+
+        }
+
+        function closeStoryAlt() {
+            // Affichez à nouveau les icônes de fichiers
+            var icons = document.getElementsByClassName('icon');
+            for (var i = 0; i < icons.length; i++) {
+                icons[i].style.display = 'block';
+            }
+
+            // Masquer la fenêtre
+            document.getElementById('story-window-alt').style.display = 'none';
+
+        }
+
+    </script>
+</body>
+</html>
