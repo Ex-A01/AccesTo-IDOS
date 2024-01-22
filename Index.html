@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cringe-o-Meter</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #cringeMeter {
+            width: 70%;
+            margin: 20px;
+        }
+
+        #progressBar {
+            width: 100%;
+            height: 30px;
+            border-radius: 10px;
+            background-color: #ddd;
+            overflow: hidden;
+        }
+
+        #filler {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        #cringeLevel {
+            font-size: 24px;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        #wordInput {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        #videoPlayer {
+            display: none; /* Cacher la vidéo par défaut */
+            width: 70%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <h1>Cringe-o-Meter</h1>
+
+        <input type="text" id="wordInput" placeholder="Entrez un mot" onkeydown="checkEnter()">
+
+        <div id="cringeMeter">
+            <div id="progressBar">
+                <div id="filler"></div>
+            </div>
+            <p id="cringeLevel">Niveau de cringe : 0%</p>
+        </div>
+
+        <button onclick="playVideo()">Jouer la vidéo</button>
+
+        <video id="videoPlayer" controls>
+            <source src="Scotland_Forever_Green_Screen.mp4" type="video/mp4">
+            Votre navigateur ne prend pas en charge la lecture de la vidéo.
+        </video>
+    </div>
+
+    <script>
+        var videoPlayer = document.getElementById("videoPlayer");
+
+        function checkEnter() {
+            if (event.key === "Enter") {
+                updateCringeLevel();
+            }
+        }
+
+        function updateCringeLevel() {
+            var cringeValue = Math.floor(Math.random() * 101);
+            var filler = document.getElementById("filler");
+            filler.style.width = cringeValue + "%";
+            updateColor(filler, cringeValue);
+            document.getElementById("cringeLevel").innerHTML = "Niveau de cringe : " + cringeValue + "%";
+        }
+
+        function updateColor(element, cringeValue) {
+            if (cringeValue < 25) {
+                element.style.backgroundColor = "#4caf50"; // Vert
+            } else if (cringeValue >= 25 && cringeValue < 50) {
+                element.style.backgroundColor = "#ffeb3b"; // Jaune
+            } else if (cringeValue >= 50 && cringeValue < 75) {
+                element.style.backgroundColor = "#ff9800"; // Orange
+            } else {
+                element.style.backgroundColor = "#f44336"; // Rouge foncé
+            }
+        }
+
+        function playVideo() {
+            videoPlayer.style.display = "block"; // Afficher la vidéo
+            videoPlayer.removeAttribute("controls"); // Supprimer les contrôles
+
+            videoPlayer.play();
+
+            // Cacher la vidéo après 5 secondes de lecture
+            setTimeout(function () {
+                videoPlayer.style.display = "none";
+            }, 5000);
+        }
+    </script>
+
+</body>
+</html>
