@@ -53,7 +53,7 @@
         }
 
         #videoPlayer {
-            display: none; /* Cacher la vidéo par défaut */
+            display: none; /* Cacher la vidÃ©o par dÃ©faut */
             width: 70%;
             margin-top: 20px;
         }
@@ -73,11 +73,11 @@
             <p id="cringeLevel">Niveau de cringe : 0%</p>
         </div>
 
-        <button onclick="playVideo()">Jouer la vidéo</button>
+        <button onclick="playVideo()">Jouer la vidÃ©o</button>
 
         <video id="videoPlayer" controls>
             <source src="Scotland_Forever_Green_Screen.mp4" type="video/mp4">
-            Votre navigateur ne prend pas en charge la lecture de la vidéo.
+            Votre navigateur ne prend pas en charge la lecture de la vidÃ©o.
         </video>
     </div>
 
@@ -106,17 +106,17 @@
             } else if (cringeValue >= 50 && cringeValue < 75) {
                 element.style.backgroundColor = "#ff9800"; // Orange
             } else {
-                element.style.backgroundColor = "#f44336"; // Rouge foncé
+                element.style.backgroundColor = "#f44336"; // Rouge foncÃ©
             }
         }
 
         function playVideo() {
-            videoPlayer.style.display = "block"; // Afficher la vidéo
-            videoPlayer.removeAttribute("controls"); // Supprimer les contrôles
+            videoPlayer.style.display = "block"; // Afficher la vidÃ©o
+            videoPlayer.removeAttribute("controls"); // Supprimer les contrÃ´les
 
             videoPlayer.play();
 
-            // Cacher la vidéo après 5 secondes de lecture
+            // Cacher la vidÃ©o aprÃ¨s 5 secondes de lecture
             setTimeout(function () {
                 videoPlayer.style.display = "none";
             }, 5000);
